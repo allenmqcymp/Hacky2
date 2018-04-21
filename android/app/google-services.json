@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "711837929478",
+    "firebase_url": "https://hacky2-47ad4.firebaseio.com",
+    "project_id": "hacky2-47ad4",
+    "storage_bucket": "hacky2-47ad4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711837929478:android:14cb3c07973d18a0",
+        "android_client_info": {
+          "package_name": "com.hacky2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711837929478-kh3mkonu8toq57sg49po7qmapv0b2gi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hacky2",
+            "certificate_hash": "83609391e884de8d3f7ee1201d1b4250303dae62"
+          }
+        },
+        {
+          "client_id": "711837929478-qn1nm912r2jp45a2odusjjoor4sl5381.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOfWSllOluBDFsBtmRDUA_hueK_dMFkOk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711837929478-qn1nm912r2jp45a2odusjjoor4sl5381.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
