@@ -30,7 +30,10 @@ const firebaseDbh = require ( './firebaseconfig');
 
 type Props = {};
 export default class StartScreen extends Component<Props> {
-
+  static navigationOptions = {
+    header: null,
+    headerLeft: null
+    };
   
 
 
