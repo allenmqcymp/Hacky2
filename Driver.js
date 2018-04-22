@@ -22,7 +22,7 @@ import StatusBar from './StatusBar'
 import ActionButton from './ActionButton'
 const styles = require('./styles.js');
 import ListItem from './ListItem.js';
-
+import MapView, { PROVIDER_GOOGLE, Marker, Circle } from 'react-native-maps'
 const firebaseDbh = require ( './firebaseconfig');
 
 
@@ -100,7 +100,7 @@ export default class Driver extends Component<Props> {
         }
 
       setTo() {
-        this.itemsRef.child("acceptedQueue").push({destination: "Colby"});
+        this.itemsRef.child("acceptedQueue").push({name: "Colby College", destination: "Colby", latitude: 44.563834695219676, longitude: 69.66263065869515});
         }
 
         _renderItem(item) {
@@ -118,15 +118,38 @@ export default class Driver extends Component<Props> {
           });
           kid.ref.remove();
         }
+        getRandomColor() {
+          var letters = '0123456789ABCDEF';
+          var color = '#';
+          for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
 
   render() {
+    const lat = this.state.latitude;
+    const long = this.state.longitude;
     const {longitude}= this.state;
     const {latitude} = this.state;
     return (
         <View style={styles.container}>
 
-        <StatusBar title="Driver View"/>
-
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{width:500,height:500,position:'relative',top: 0, left: 0}}
+          region={{
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}>
+          <Marker coordinate= {{latitude: this.state.latitude, longitude: this.state.longitude}} pinColor= '#00FFFF'/>
+          
+           {this.state.acc.map((item,index) => 
+            <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
+           )}
+          </MapView>
         <View>
         <ActionButton title="Going to Colby" onPress= {() => this.setTo()}/>
         <ActionButton title="Picking people up" onPress = {() => this.setAway()}/>

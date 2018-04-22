@@ -22,7 +22,9 @@ import { NavigationActions } from 'react-navigation';
 import ReactNative from 'react-native';
 import * as firebase from 'firebase';
 import StatusBar from './StatusBar'
+import MapViewDirections from 'react-native-maps-directions';
 const styles = require('./styles.js');
+import MapView, { PROVIDER_GOOGLE, Marker, Circle } from 'react-native-maps'
 
 const firebaseDbh = require ( './firebaseconfig');
 
@@ -59,15 +61,24 @@ export default class Rider extends Component<Props> {
       componentDidMount() {
         this.watchID = navigator.geolocation.watchPosition(
           (position) => {
+            
             this.setState({
+              
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
             error: null,
             });
-            
+            this.itemsRef.child("riders").once('value', (snap)=>{
+              snap.forEach((rider)=>{
+                if (rider.child("name").val()===this.state.name){
+                  rider.ref.update({longitude: this.state.longitude});
+                  rider.ref.update({latitude: this.state.latitude});
+                }
+              });
+            });
           },
           (error) => this.setState({error: error.message}),
-          {enableHighAccuracy: false, timeout: 20000, maximumAge: 10000}
+          {enableHighAccuracy: false, timeout: 2000, maximumAge: 20}
         );
         this.listenForItems(this.itemsRef);
       }
@@ -137,16 +148,61 @@ export default class Rider extends Component<Props> {
         });
         this.setState({requested: false});
       }
+      getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      routeMarkers(){
+        this.state.arr.forEach((mark)=>{
+          return(
+            <Marker coordinate= {{latitude: mark.child("latitude").val(), longitude: mark.child("longitude").val()}} pinColor= '#A52A2A'/>
+          );
+        });
+      }
+      getWaypoints(){
+        var waypoints = [];
+        this.state.arr.forEach((way)=>{
+          waypoints.push({longitude: way.child("longitude").val(), latitude: way.child("latitude").val()})
+        });
+      }
 
   render() {
+    
+    const lat = this.state.driverLatitude;
+    const long = this.state.driverLongitude;
+    const GOOGLE_MAPS_APIKEY = 'AIzaSyAgDkRyYx3uERuAKbeeB6iINW3nuMDBjEA';
     const text = this.state.toColby ? (<Text>The jitney is going towards colby</Text>): 
     (<Text>The jitney is going away from colby</Text>);
     const requestButton = this.state.requested ? (<TouchableOpacity onPress= {()=>this.cancelRequest()}><Text>Cancel Request</Text></TouchableOpacity>):
     (<TouchableOpacity onPress= {()=> this.setModalVisible(true)}><Text>Request ride</Text></TouchableOpacity>);
           return (
          <View style={styles.container}>
-
-         <StatusBar title="Rider View"/>
+            
+         <View >
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{width:500,height:500,position:'relative',top: 0, left: 0}}
+          region={{
+            latitude: lat,
+            longitude: long,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}>
+          
+          <Marker coordinate= {{latitude: this.state.driverLatitude, longitude: this.state.driverLongitude}} pinColor= '#00FFFF'/>
+          
+           {this.state.arr.map((item,index) => 
+            <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
+           )}
+          </MapView>
+        </View>
+        <View>
+         <View>
          
             {text}
             <Text>{String(this.state.driverLatitude)}</Text>
@@ -154,6 +210,8 @@ export default class Rider extends Component<Props> {
             
             <Text>{String(this.state.latitude)}</Text>
             <Text>{String(this.state.longitude)}</Text>
+            </View>
+            <View>
             <Modal
           animationType="slide"
           transparent={false}
@@ -192,7 +250,11 @@ export default class Rider extends Component<Props> {
             </View>
           </View>
         </Modal>
+        </View>
+        <View>
         {requestButton}
+        </View>
+        <View>
         <Text>Route: </Text>
         <ScrollView>
               <FlatList
@@ -205,14 +267,14 @@ export default class Rider extends Component<Props> {
                           </Text>
                       </View>
                       <View>
-                          <TouchableOpacity title="Approve" onPress= {() => this.approve(item)}>
-                              <Text>APPROVE</Text>
-                          </TouchableOpacity>
                       </View>
                 </View>
                   )}
               />
         </ScrollView>
+        </View>
+        </View>
+        
             </View>
      );
      

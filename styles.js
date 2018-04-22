@@ -8,6 +8,7 @@ var styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f2',
     flex: 1,
+    flexDirection: 'column'
   },
   listview: {
     flex: 1,
@@ -63,6 +64,8 @@ var styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 16,
   },
+  cont: { ... StyleSheet.absoluteFillObject },
+
 })
 
 module.exports = styles
