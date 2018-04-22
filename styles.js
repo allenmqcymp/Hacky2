@@ -5,10 +5,131 @@ const constants = {
 };
 
 var styles = StyleSheet.create({
+  ApproveButton:{
+    height:34,
+    borderWidth:2,
+    borderColor:'#2d4ea4',
+    width:90,
+    borderRadius: 70,
+    alignItems:'center',
+    justifyContent:'center',
+    alignSelf:'flex-end',
+  },
+  AddColbyButton:{
+    height:60,
+    borderWidth:3,
+    marginTop:10,
+    borderColor:'#2d4ea4',
+    width:300,
+    borderRadius: 70,
+    alignItems:'center',
+    justifyContent:'center',
+    alignSelf:'center',
+  },
+  AddColbyText:{
+    color:'#2d4ea4',
+    fontSize:20,
+    fontWeight:"600",
+  },
+  ApproveButtonText:{
+    color:'#2d4ea4',
+    fontSize:12,
+    fontWeight:"600",
+  },
+  JitneyInfoHeader:{
+    color:'black',
+    paddingLeft:20,
+    fontSize:16,
+    fontWeight:"600",
+  },
+  SectionHeader:{
+    color:'#2d4ea4',
+    fontSize:19,
+    paddingLeft:10,
+    fontWeight:"900",
+    paddingLeft:20,
+    paddingTop:10,
+    paddingBottom:5,
+  },
+  JitneyInfoTitle:{
+    color:'black',
+    fontSize:19,
+    paddingLeft:10,
+    fontWeight:"900",
+    paddingLeft:10,
+    paddingTop:30,
+    paddingBottom:20,
+  },
+  JitneyInfo:{
+    width:'100%',
+    fontSize:16,
+    paddingLeft:20,
+    paddingBottom:10,
+    paddingTop:2,
+  },
+  requestcontainer:{
+    width:'100%',
+    alignItems: 'center',
+    height:90,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop:20,
+  },
+  requestJitney:{
+    width:260,
+    alignItems: 'center',
+    height:70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'#002878',
+    borderRadius: 50,
+    color:'#fff',
+  },
+  InfoContainer:{
+    width:'100%',
+    height:'50%',
+    color:'#fff',
+  },
+  mapPlaceholder:{
+    width:'100%',
+    alignItems: 'center',
+    height:'50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color:'#fff',
+  },
+  RiderButton:{
+    width:300,
+    borderColor:'#002878',
+    height:70,
+    fontSize:40,fontWeight:'900',
+    alignItems: 'center',
+    borderRadius:60,
+    borderWidth:5,
+    margin:20,
+    color:'#fff',
+    justifyContent: 'center',
+  },
+  DriverButton:{
+    width:302.2,
+    height:72.5,
+    fontSize:40,fontWeight:'900',
+    alignItems: 'center',
+    borderRadius:60,
+    borderWidth:0,
+    margin:20,
+    backgroundColor:'#002878',
+    color:'#fff',
+    justifyContent: 'center',
+  },
   container: {
+    justifyContent: 'center',
+    alignItems:'center',
+    position:'absolute',
+    height:'100%',
+    width:'100%',
     backgroundColor: '#f2f2f2',
     flex: 1,
-    flexDirection: 'column'
   },
   listview: {
     flex: 1,
@@ -41,7 +162,7 @@ var styles = StyleSheet.create({
   },
   navbarTitle: {
     color: '#444',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "500"
   },
   statusbar: {
@@ -64,8 +185,6 @@ var styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 16,
   },
-  cont: { ... StyleSheet.absoluteFillObject },
-
 })
 
 module.exports = styles

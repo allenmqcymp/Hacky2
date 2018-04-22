@@ -17,6 +17,7 @@ import {
   TextInput,
   ScrollView,
   FlatList,
+  Image
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import ReactNative from 'react-native';
@@ -178,13 +179,111 @@ export default class Rider extends Component<Props> {
     const GOOGLE_MAPS_APIKEY = 'AIzaSyAgDkRyYx3uERuAKbeeB6iINW3nuMDBjEA';
     const text = this.state.toColby ? (<Text>The jitney is going towards colby</Text>): 
     (<Text>The jitney is going away from colby</Text>);
-    const requestButton = this.state.requested ? (<TouchableOpacity onPress= {()=>this.cancelRequest()}><Text>Cancel Request</Text></TouchableOpacity>):
-    (<TouchableOpacity onPress= {()=> this.setModalVisible(true)}><Text>Request ride</Text></TouchableOpacity>);
+    const requestButton = this.state.requested ? (<TouchableOpacity  style={styles.requestJitney} onPress= {()=> this.cancelRequest()}>
+    <Text style={{color: '#fff',fontSize:25,fontWeight:'900',fontFamily:'Open Sans'}}>CANCEL</Text>
+</TouchableOpacity >):
+    (<TouchableOpacity  style={styles.requestJitney} onPress= {()=> this.setModalVisible(true)}>
+    <Text style={{color: '#fff',fontSize:25,fontWeight:'900',fontFamily:'Open Sans'}}>REQUEST</Text>
+</TouchableOpacity >);
           return (
-         <View style={styles.container}>
+        //  <View style={styles.container}>
             
-         <View >
-        <MapView
+        //  <View >
+        // <MapView
+        //   provider={PROVIDER_GOOGLE}
+        //   style={{width:500,height:500,position:'relative',top: 0, left: 0}}
+        //   region={{
+        //     latitude: lat,
+        //     longitude: long,
+        //     latitudeDelta: 0.015,
+        //     longitudeDelta: 0.0121,
+        //   }}>
+          
+        //   <Marker coordinate= {{latitude: this.state.driverLatitude, longitude: this.state.driverLongitude}} pinColor= '#00FFFF'/>
+          
+        //    {this.state.arr.map((item,index) => 
+        //     <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
+        //    )}
+        //   </MapView>
+        // </View>
+        // <View>
+        //  <View>
+         
+        //     {text}
+        //     <Text>{String(this.state.driverLatitude)}</Text>
+        //     <Text>{String(this.state.driverLongitude)}</Text>
+            
+        //     <Text>{String(this.state.latitude)}</Text>
+        //     <Text>{String(this.state.longitude)}</Text>
+        //     </View>
+        //     <View>
+        //     <Modal
+        //   animationType="slide"
+        //   transparent={false}
+        //   visible={this.state.modalVisible}
+        //   onRequestClose={() => {
+        //     alert('Modal has been closed.');
+        //   }}>
+        //   <View style={{marginTop: 22}}>
+        //     <View>
+        //       <Text>Enter your name</Text>
+        //     <TextInput
+        // style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        // onChangeText={(text) => this.setState({name: text})}
+        // value={this.state.text}
+        // />
+        // <Text>Where do you want to be picked up?</Text>
+        //     <TextInput
+        //   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        //   onChangeText={(text) => this.setState({pickupLocation: text})}
+        //   value={this.state.text}
+        // />
+        // <Text>Where do you want to go?</Text>
+        //     <TextInput
+        //   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        //   onChangeText={(text) => this.setState({destination: text})}
+        //   value={this.state.text}
+        // />
+        //     <TouchableOpacity onPress= {()=> this.sendRequest()}><Text>Request</Text></TouchableOpacity>
+
+        //       <TouchableHighlight
+        //         onPress={() => {
+        //           this.setModalVisible(!this.state.modalVisible);
+        //         }}>
+        //         <Text>Hide Modal</Text>
+        //       </TouchableHighlight>
+        //     </View>
+        //   </View>
+        // </Modal>
+        // </View>
+        // <View>
+        // {requestButton}
+        // </View>
+        // <View>
+        // <Text>Route: </Text>
+        // <ScrollView>
+        //       <FlatList
+        //         data = {this.state.arr}
+        //         renderItem={({ item }) => (
+        //           <View>
+        //               <View>
+        //                   <Text>
+        //                       {item.child("destination").val()}
+        //                   </Text>
+        //               </View>
+        //               <View>
+        //               </View>
+        //         </View>
+        //           )}
+        //       />
+        // </ScrollView>
+        // </View>
+        // </View>
+        
+        //     </View>
+        <View style={styles.container}>
+        <View style={styles.mapPlaceholder}>
+         <MapView
           provider={PROVIDER_GOOGLE}
           style={{width:500,height:500,position:'relative',top: 0, left: 0}}
           region={{
@@ -201,17 +300,20 @@ export default class Rider extends Component<Props> {
            )}
           </MapView>
         </View>
-        <View>
-         <View>
-         
-            {text}
-            <Text>{String(this.state.driverLatitude)}</Text>
-            <Text>{String(this.state.driverLongitude)}</Text>
-            
-            <Text>{String(this.state.latitude)}</Text>
-            <Text>{String(this.state.longitude)}</Text>
+        <View style={styles.InfoContainer}>
+        
+        <View style={styles.requestcontainer}>
+                {requestButton}
             </View>
-            <View>
+            <Text style={styles.SectionHeader}>JITNEY INFORMATION</Text>
+            <Text style={styles.JitneyInfoHeader}>Current Stops:</Text>
+            <ScrollView>
+            <FlatList
+                data={this.state.arr}
+                renderItem={({item}) => <Text style={styles.JitneyInfo}>{item.child("destination").val()}</Text>}
+            />
+            </ScrollView>
+        </View>
             <Modal
           animationType="slide"
           transparent={false}
@@ -250,32 +352,7 @@ export default class Rider extends Component<Props> {
             </View>
           </View>
         </Modal>
-        </View>
-        <View>
-        {requestButton}
-        </View>
-        <View>
-        <Text>Route: </Text>
-        <ScrollView>
-              <FlatList
-                data = {this.state.arr}
-                renderItem={({ item }) => (
-                  <View>
-                      <View>
-                          <Text>
-                              {item.child("destination").val()}
-                          </Text>
-                      </View>
-                      <View>
-                      </View>
-                </View>
-                  )}
-              />
-        </ScrollView>
-        </View>
-        </View>
-        
-            </View>
+    </View>
      );
      
           

@@ -11,7 +11,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import ReactNative from 'react-native';
@@ -60,18 +61,27 @@ export default class StartScreen extends Component<Props> {
 
   render() {
     return (
-        <View style={styles.container}>
+      //   <View style={styles.container}>
+      // <View style={styles.container}>
+      // <TouchableOpacity onPress= {this.NavigateDriver}>
+      // <Text>Go To driver Screen</Text>
+      //     </TouchableOpacity >
+      //     </View>
+      //     <View style={styles.container}>
+      //     <TouchableOpacity onPress= {this.NavigateRider}>
+      // <Text>Go To rider Screen</Text>
+      //     </TouchableOpacity >
+      //     </View>
+      // </View>
       <View style={styles.container}>
-      <TouchableOpacity onPress= {this.NavigateDriver}>
-      <Text>Go To driver Screen</Text>
-          </TouchableOpacity >
-          </View>
-          <View style={styles.container}>
-          <TouchableOpacity onPress= {this.NavigateRider}>
-      <Text>Go To rider Screen</Text>
-          </TouchableOpacity >
-          </View>
-      </View>
+      <Image style={{width: 300, height: 300}} source={require('./MuleRides.png')} />
+      <TouchableOpacity onPress= {this.NavigateDriver} style={styles.DriverButton}>
+          <Text style={{color: '#ffffff',fontSize:40,}}>DRIVER</Text>
+      </TouchableOpacity >
+      <TouchableOpacity onPress= {this.NavigateRider} style={styles.RiderButton}>
+          <Text style={{color: '#002878',fontSize:40,fontWeight:'900',borderColor:'#002878'}}>RIDER</Text>
+      </TouchableOpacity >
+</View>
     );
   }
 }

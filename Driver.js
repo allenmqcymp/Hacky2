@@ -14,6 +14,8 @@ import {
   ListView,
   ScrollView,
   FlatList,
+  Image,
+  Dimensions
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import ReactNative from 'react-native';
@@ -133,9 +135,75 @@ export default class Driver extends Component<Props> {
     const {longitude}= this.state;
     const {latitude} = this.state;
     return (
+        // <View style={styles.container}>
+
+        // <MapView
+        //   provider={PROVIDER_GOOGLE}
+        //   style={{width:500,height:500,position:'relative',top: 0, left: 0}}
+        //   region={{
+        //     latitude: lat,
+        //     longitude: long,
+        //     latitudeDelta: 0.015,
+        //     longitudeDelta: 0.0121,
+        //   }}>
+        //   <Marker coordinate= {{latitude: this.state.latitude, longitude: this.state.longitude}} pinColor= '#00FFFF'/>
+          
+        //    {this.state.acc.map((item,index) => 
+        //     <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
+        //    )}
+        //   </MapView>
+        // <View>
+        // <ActionButton title="Going to Colby" onPress= {() => this.setTo()}/>
+        // <ActionButton title="Picking people up" onPress = {() => this.setAway()}/>
+        // <Text>{String(this.state.latitude)}</Text>
+        // <Text>{String(this.state.longitude)}</Text>
+        // <Text>Requested queue</Text>
+        // <ScrollView>
+        //       <FlatList
+        //         data = {this.state.req}
+        //         renderItem={({ item }) => (
+        //           <View>
+        //               <View>
+        //                   <Text>
+        //                       Name: {item.child("name").val()}, Going to: {item.child("destination").val()}, Pickup location: {item.child("pickupLocation").val()}
+        //                   </Text>
+        //               </View>
+        //               <View>
+        //                   <TouchableOpacity title="Approve" onPress= {() => this.approve(item)}>
+        //                       <Text>APPROVE</Text>
+        //                   </TouchableOpacity>
+        //               </View>
+        //         </View>
+        //           )}
+        //       />
+        // </ScrollView>
+        // <Text>Accepted queue</Text>
+        // <ScrollView>
+        //       <FlatList
+        //         data = {this.state.acc}
+        //         renderItem={({ item }) => (
+        //           <View>
+        //               <View>
+        //                   <Text>
+        //                       Name: {item.child("name").val()}, Going to: {item.child("destination").val()}, Pickup location: {item.child("pickupLocation").val()}
+        //                   </Text>
+        //               </View>
+        //               <View>
+        //                   <TouchableOpacity title="Approve" onPress= {() => {item.ref.remove()}}>
+        //                       <Text>Finished ride</Text>
+        //                   </TouchableOpacity>
+        //               </View>
+        //         </View>
+        //           )}
+        //       />
+        // </ScrollView>
+        // </View>
+        //  </View>
         <View style={styles.container}>
 
-        <MapView
+        <View style={styles.mapPlaceholder}>
+          
+         <MapView
           provider={PROVIDER_GOOGLE}
           style={{width:500,height:500,position:'relative',top: 0, left: 0}}
           region={{
@@ -150,53 +218,81 @@ export default class Driver extends Component<Props> {
             <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
            )}
           </MapView>
-        <View>
-        <ActionButton title="Going to Colby" onPress= {() => this.setTo()}/>
-        <ActionButton title="Picking people up" onPress = {() => this.setAway()}/>
-        <Text>{String(this.state.latitude)}</Text>
-        <Text>{String(this.state.longitude)}</Text>
-        <Text>Requested queue</Text>
-        <ScrollView>
-              <FlatList
-                data = {this.state.req}
-                renderItem={({ item }) => (
-                  <View>
-                      <View>
-                          <Text>
-                              Name: {item.child("name").val()}, Going to: {item.child("destination").val()}, Pickup location: {item.child("pickupLocation").val()}
-                          </Text>
-                      </View>
-                      <View>
-                          <TouchableOpacity title="Approve" onPress= {() => this.approve(item)}>
-                              <Text>APPROVE</Text>
-                          </TouchableOpacity>
-                      </View>
-                </View>
-                  )}
-              />
-        </ScrollView>
-        <Text>Accepted queue</Text>
-        <ScrollView>
-              <FlatList
-                data = {this.state.acc}
-                renderItem={({ item }) => (
-                  <View>
-                      <View>
-                          <Text>
-                              Name: {item.child("name").val()}, Going to: {item.child("destination").val()}, Pickup location: {item.child("pickupLocation").val()}
-                          </Text>
-                      </View>
-                      <View>
-                          <TouchableOpacity title="Approve" onPress= {() => {item.ref.remove()}}>
-                              <Text>Finished ride</Text>
-                          </TouchableOpacity>
-                      </View>
-                </View>
-                  )}
-              />
-        </ScrollView>
+
         </View>
-         </View>
+
+    <View style={styles.InfoContainer}>
+    <TouchableOpacity style={styles.AddColbyButton} title="Approve" onPress= {() => this.setTo()}>
+        <Text style={styles.AddColbyText}>ADD COLBY TO QUEUE</Text>
+    </TouchableOpacity>
+    
+    <ScrollView style={{marginTop:20}}>
+    <Text style={styles.SectionHeader}>REQUESTS</Text>
+                  <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
+                        <View style={{alignSelf:'flex-start'}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Name</Text></View>
+                                <View style={{flex: 0.4}}><Text style={{fontWeight:'bold',color:'black'}}>Pickup</Text></View>
+                                <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Destination</Text></View>
+                                </View>
+                        </View>
+                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                        </View>
+                  </View>
+                <FlatList
+                  data={this.state.req}
+                  renderItem={({ item }) => (
+                    <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
+                        <View style={{alignSelf:'flex-start'}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                    <View style={{flex: 0.3}}><Text>{item.child("name").val()}</Text></View>
+                                    <View style={{flex: 0.4}}><Text>{item.child("pickupLocation").val()}</Text></View>
+                                    <View style={{flex: 0.3}}><Text>{item.child("destination").val()}</Text></View>
+                                </View>
+                        </View>
+                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                            <TouchableOpacity style={styles.ApproveButton} title="Approve" onPress= {() => this.approve(item)}>
+                                <Text style={styles.ApproveButtonText}>ADD</Text>
+                            </TouchableOpacity>
+                        </View>
+                  </View>
+                    )}
+                />
+            <Text style={styles.SectionHeader}>QUEUE</Text>
+                  <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
+                        <View style={{alignSelf:'flex-start'}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Name</Text></View>
+                                <View style={{flex: 0.4}}><Text style={{fontWeight:'bold',color:'black'}}>Pickup</Text></View>
+                                <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Destination</Text></View>
+                                </View>
+                        </View>
+                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                        </View>
+                  </View>
+                <FlatList
+                  data={this.state.acc}
+                  renderItem={({ item }) => (
+                    <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
+                        <View style={{alignSelf:'flex-start'}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                    <View style={{flex: 0.3}}><Text>{item.child("name").val()}</Text></View>
+                                    <View style={{flex: 0.4}}><Text>{item.child("pickupLocation").val()}</Text></View>
+                                    <View style={{flex: 0.3}}><Text>{item.child("destination").val()}</Text></View>
+                                </View>
+                        </View>
+                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                            <TouchableOpacity style={styles.ApproveButton} title="Approve" onPress= {() => {item.ref.remove()}}>
+                                <Text style={styles.ApproveButtonText}>FINISH</Text>
+                            </TouchableOpacity>
+                        </View>
+                  </View>
+                    )}
+                />
+        </ScrollView>
+
+    </View>
+  </View>
     );
   }
 }
