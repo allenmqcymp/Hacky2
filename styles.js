@@ -9,22 +9,23 @@ var styles = StyleSheet.create({
     height:34,
     borderWidth:2,
     borderColor:'#2d4ea4',
-    width:90,
+    width:34,
     borderRadius: 70,
     alignItems:'center',
     justifyContent:'center',
     alignSelf:'flex-end',
   },
   AddColbyButton:{
-    height:60,
-    borderWidth:3,
-    marginTop:10,
-    borderColor:'#2d4ea4',
-    width:300,
-    borderRadius: 70,
-    alignItems:'center',
-    justifyContent:'center',
+    width:350,
+    alignItems: 'center',
+    height:70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:15,
     alignSelf:'center',
+    backgroundColor:'#002878',
+    borderRadius: 50,
+    color:'#fff',
   },
   AddColbyText:{
     color:'#2d4ea4',
@@ -33,8 +34,8 @@ var styles = StyleSheet.create({
   },
   ApproveButtonText:{
     color:'#2d4ea4',
-    fontSize:12,
-    fontWeight:"600",
+    fontSize:16,
+    fontWeight:"900",
   },
   JitneyInfoHeader:{
     color:'black',
@@ -81,6 +82,7 @@ var styles = StyleSheet.create({
     height:70,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf:'center',
     backgroundColor:'#002878',
     borderRadius: 50,
     color:'#fff',
@@ -128,7 +130,7 @@ var styles = StyleSheet.create({
     position:'absolute',
     height:'100%',
     width:'100%',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#ECF0F1',
     flex: 1,
   },
   listview: {
@@ -160,6 +162,9 @@ var styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row'
   },
+  requestJitneyText:{
+      color: '#fff',fontSize:25,fontWeight:'900',alignSelf:'center',alignItems:'center',justifyContent:'center',textAlign:'center'}
+  ,
   navbarTitle: {
     color: '#444',
     fontSize: 14,

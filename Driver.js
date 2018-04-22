@@ -204,6 +204,239 @@ export default class Driver extends Component<Props> {
         <View style={styles.mapPlaceholder}>
           
          <MapView
+         customMapStyle={[
+          {
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#8ec3b9"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1a3646"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.country",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#4b6878"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#64779e"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#4b6878"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#334e87"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#283d6a"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#6f9ba5"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#3C7680"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#304a7d"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#98a5be"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#2c6675"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#255763"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#b0d5ce"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#98a5be"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.line",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#283d6a"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#3a4762"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#0e1626"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#4e6d70"
+              }
+            ]
+          }
+        ]}
           provider={PROVIDER_GOOGLE}
           style={{width:500,height:500,position:'relative',top: 0, left: 0}}
           region={{
@@ -223,14 +456,14 @@ export default class Driver extends Component<Props> {
 
     <View style={styles.InfoContainer}>
     <TouchableOpacity style={styles.AddColbyButton} title="Approve" onPress= {() => this.setTo()}>
-        <Text style={styles.AddColbyText}>ADD COLBY TO QUEUE</Text>
+        <Text style={styles.requestJitneyText}>ADD COLBY TO QUEUE</Text>
     </TouchableOpacity>
     
     <ScrollView style={{marginTop:20}}>
     <Text style={styles.SectionHeader}>REQUESTS</Text>
                   <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
                         <View style={{alignSelf:'flex-start'}}>
-                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-34}}>
                                 <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Name</Text></View>
                                 <View style={{flex: 0.4}}><Text style={{fontWeight:'bold',color:'black'}}>Pickup</Text></View>
                                 <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Destination</Text></View>
@@ -243,16 +476,16 @@ export default class Driver extends Component<Props> {
                   data={this.state.req}
                   renderItem={({ item }) => (
                     <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
-                        <View style={{alignSelf:'flex-start'}}>
-                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                        <View style={{alignSelf:'flex-start',}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-34}}>
                                     <View style={{flex: 0.3}}><Text>{item.child("name").val()}</Text></View>
                                     <View style={{flex: 0.4}}><Text>{item.child("pickupLocation").val()}</Text></View>
                                     <View style={{flex: 0.3}}><Text>{item.child("destination").val()}</Text></View>
                                 </View>
                         </View>
-                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                        <View style={{alignSelf:'flex-end',width:34,paddingBottom:3,paddingRight:15}}>
                             <TouchableOpacity style={styles.ApproveButton} title="Approve" onPress= {() => this.approve(item)}>
-                                <Text style={styles.ApproveButtonText}>ADD</Text>
+                                <Text style={styles.ApproveButtonText}>+</Text>
                             </TouchableOpacity>
                         </View>
                   </View>
@@ -261,7 +494,7 @@ export default class Driver extends Component<Props> {
             <Text style={styles.SectionHeader}>QUEUE</Text>
                   <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
                         <View style={{alignSelf:'flex-start'}}>
-                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-34}}>
                                 <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Name</Text></View>
                                 <View style={{flex: 0.4}}><Text style={{fontWeight:'bold',color:'black'}}>Pickup</Text></View>
                                 <View style={{flex: 0.3}}><Text style={{fontWeight:'bold',color:'black'}}>Destination</Text></View>
@@ -274,16 +507,16 @@ export default class Driver extends Component<Props> {
                   data={this.state.acc}
                   renderItem={({ item }) => (
                     <View style={{flex: 1, flexDirection: 'row',height:40,width:'100%'}}>
-                        <View style={{alignSelf:'flex-start'}}>
-                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-90}}>
+                        <View style={{alignSelf:'flex-start',}}>
+                                <View style={{flexDirection: 'row',width:'100%',fontSize:16,padding:8,paddingLeft:20,width: Dimensions.get('window').width-34}}>
                                     <View style={{flex: 0.3}}><Text>{item.child("name").val()}</Text></View>
                                     <View style={{flex: 0.4}}><Text>{item.child("pickupLocation").val()}</Text></View>
                                     <View style={{flex: 0.3}}><Text>{item.child("destination").val()}</Text></View>
                                 </View>
                         </View>
-                        <View style={{alignSelf:'flex-end',width:90,paddingBottom:3,paddingRight:15}}>
+                        <View style={{alignSelf:'flex-end',width:34,paddingBottom:3,paddingRight:15}}>
                             <TouchableOpacity style={styles.ApproveButton} title="Approve" onPress= {() => {item.ref.remove()}}>
-                                <Text style={styles.ApproveButtonText}>FINISH</Text>
+                                <Text style={styles.ApproveButtonText}>-</Text>
                             </TouchableOpacity>
                         </View>
                   </View>
@@ -296,5 +529,3 @@ export default class Driver extends Component<Props> {
     );
   }
 }
-
-

@@ -107,6 +107,10 @@ export default class Rider extends Component<Props> {
                 if (!this.state.requested)
                 this.setState({requested: true});
               }
+              else{
+                if (this.state.requested)
+                this.setState({requested: false});
+              }
             });
           });
           this.itemsRef.child("acceptedQueue").once('value', (snp)=>{
@@ -114,6 +118,10 @@ export default class Rider extends Component<Props> {
               if (children.child("name").val()===this.state.name){
                 if (!this.state.requested)
                 this.setState({requested: true});
+              }
+              else{
+                if (this.state.requested)
+                this.setState({requested: false});
               }
             });
           });
@@ -140,6 +148,14 @@ export default class Rider extends Component<Props> {
       }
       cancelRequest(){
         this.itemsRef.child("riders").once('value', (snp)=>{
+          snp.forEach((children)=>{
+            var a = false;
+            if (children.child("name").val()===this.state.name){
+              children.ref.remove();
+            }
+          });
+        });
+        this.itemsRef.child("acceptedQueue").once('value', (snp)=>{
           snp.forEach((children)=>{
             var a = false;
             if (children.child("name").val()===this.state.name){
@@ -180,10 +196,10 @@ export default class Rider extends Component<Props> {
     const text = this.state.toColby ? (<Text>The jitney is going towards colby</Text>): 
     (<Text>The jitney is going away from colby</Text>);
     const requestButton = this.state.requested ? (<TouchableOpacity  style={styles.requestJitney} onPress= {()=> this.cancelRequest()}>
-    <Text style={{color: '#fff',fontSize:25,fontWeight:'900',fontFamily:'Open Sans'}}>CANCEL</Text>
+    <Text style={styles.requestJitneyText}>CANCEL</Text>
 </TouchableOpacity >):
     (<TouchableOpacity  style={styles.requestJitney} onPress= {()=> this.setModalVisible(true)}>
-    <Text style={{color: '#fff',fontSize:25,fontWeight:'900',fontFamily:'Open Sans'}}>REQUEST</Text>
+    <Text style={styles.requestJitneyText}>REQUEST</Text>
 </TouchableOpacity >);
           return (
         //  <View style={styles.container}>
@@ -285,6 +301,239 @@ export default class Rider extends Component<Props> {
         <View style={styles.mapPlaceholder}>
          <MapView
           provider={PROVIDER_GOOGLE}
+          customMapStyle={[
+            {
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#1d2c4d"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#8ec3b9"
+                }
+              ]
+            },
+            {
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#1a3646"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.country",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#4b6878"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.land_parcel",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#64779e"
+                }
+              ]
+            },
+            {
+              "featureType": "administrative.province",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#4b6878"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.man_made",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#334e87"
+                }
+              ]
+            },
+            {
+              "featureType": "landscape.natural",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#023e58"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#283d6a"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#6f9ba5"
+                }
+              ]
+            },
+            {
+              "featureType": "poi",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#1d2c4d"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#023e58"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#3C7680"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#304a7d"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#98a5be"
+                }
+              ]
+            },
+            {
+              "featureType": "road",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#1d2c4d"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#2c6675"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "geometry.stroke",
+              "stylers": [
+                {
+                  "color": "#255763"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#b0d5ce"
+                }
+              ]
+            },
+            {
+              "featureType": "road.highway",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#023e58"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#98a5be"
+                }
+              ]
+            },
+            {
+              "featureType": "transit",
+              "elementType": "labels.text.stroke",
+              "stylers": [
+                {
+                  "color": "#1d2c4d"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.line",
+              "elementType": "geometry.fill",
+              "stylers": [
+                {
+                  "color": "#283d6a"
+                }
+              ]
+            },
+            {
+              "featureType": "transit.station",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#3a4762"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "geometry",
+              "stylers": [
+                {
+                  "color": "#0e1626"
+                }
+              ]
+            },
+            {
+              "featureType": "water",
+              "elementType": "labels.text.fill",
+              "stylers": [
+                {
+                  "color": "#4e6d70"
+                }
+              ]
+            }
+          ]}
           style={{width:500,height:500,position:'relative',top: 0, left: 0}}
           region={{
             latitude: lat,
@@ -314,43 +563,42 @@ export default class Rider extends Component<Props> {
             />
             </ScrollView>
         </View>
-            <Modal
+        <Modal
+          style={{alignSelf:'center'}}
           animationType="slide"
           transparent={false}
+          presentationStyle = "pageSheet"
           visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
-            <View>
-              <Text>Enter your name</Text>
-            <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({name: text})}
-        value={this.state.text}
-        />
-        <Text>Where do you want to be picked up?</Text>
-            <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({pickupLocation: text})}
-          value={this.state.text}
-        />
-        <Text>Where do you want to go?</Text>
-            <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(text) => this.setState({destination: text})}
-          value={this.state.text}
-        />
-            <TouchableOpacity onPress= {()=> this.sendRequest()}><Text>Request</Text></TouchableOpacity>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
+          onRequestClose={() => {this.setModalVisible(false);
+        }}>
+            <View style={{marginTop: 22,width:'90%',padding:10,alignContent:'center',justifyContent:'center',alignSelf:'center'}}>
+                <View>
+                <Text style={{alignSelf:'center',color:'black',fontSize:19,paddingLeft:10,fontWeight:"900",marginTop:30,marginBottom:15}}>Enter your name</Text>
+                    <TextInput
+                      style={{height: 50, borderColor: 'gray', borderWidth: 0,fontSize:18,textAlign:'center'}}
+                      onChangeText={(text) => this.setState({name: text})}
+                      value={this.state.text}
+                    />
+                    <Text style={{alignSelf:'center',color:'black',fontSize:19,paddingLeft:10,fontWeight:"900",marginTop:30,marginBottom:15}}>Where do you want to be picked up?</Text>
+                    <TextInput
+                      style={{height: 50, borderColor: 'gray', borderWidth: 0,fontSize:18,textAlign:'center'}}
+                      onChangeText={(text) => this.setState({pickupLocation: text})}
+                      value={this.state.text}
+                    />
+                    <Text style={{alignSelf:'center',color:'black',fontSize:19,paddingLeft:10,fontWeight:"900",marginTop:30,marginBottom:15}}>Where do you want to go?</Text>
+                    <TextInput
+                      style={{height: 50, borderColor: 'gray', borderWidth: 0,fontSize:18,textAlign:'center'}}
+                        onChangeText={(text) => this.setState({destination: text})}
+                      value={this.state.text}
+                    />
+                    <TouchableOpacity style={{height:45,borderWidth:2,borderColor:'#2d4ea4',width:170,borderRadius: 80,alignItems:'center',justifyContent:'center',alignSelf:'center',margin:20}} onPress= {()=> this.sendRequest()}>
+                        <Text style={{color:'#2d4ea4',fontSize:19,fontWeight:"900"}}>Request</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{height:45,borderWidth:2,borderColor:'#2d4ea4',width:170,borderRadius: 80,alignItems:'center',justifyContent:'center',alignSelf:'center',margin:10}} onPress={() => {this.setModalVisible(!this.state.modalVisible);}}>
+                        <Text style={{color:'#2d4ea4',fontSize:19,fontWeight:"900"}}>Hide Modal</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-          </View>
         </Modal>
     </View>
      );
@@ -359,5 +607,3 @@ export default class Rider extends Component<Props> {
     }
 
 }
-
-
