@@ -177,7 +177,7 @@ export default class Rider extends Component<Props> {
       routeMarkers(){
         this.state.arr.forEach((mark)=>{
           return(
-            <Marker coordinate= {{latitude: mark.child("latitude").val(), longitude: mark.child("longitude").val()}} pinColor= '#A52A2A'/>
+            <Marker coordinate= {{latitude: mark.child("latitude").val(), longitude: mark.child("longitude").val()}} image='./marker.png'/>
           );
         });
       }
@@ -542,7 +542,7 @@ export default class Rider extends Component<Props> {
             longitudeDelta: 0.0121,
           }}>
           
-          <Marker coordinate= {{latitude: this.state.driverLatitude, longitude: this.state.driverLongitude}} pinColor= '#00FFFF'/>
+          <Marker coordinate= {{latitude: this.state.driverLatitude, longitude: this.state.driverLongitude}} image= {require('./marker.png')} />
           
            {this.state.arr.map((item,index) => 
             <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>

@@ -445,7 +445,7 @@ export default class Driver extends Component<Props> {
             latitudeDelta: 0.015,
             longitudeDelta: 0.0121,
           }}>
-          <Marker coordinate= {{latitude: this.state.latitude, longitude: this.state.longitude}} pinColor= '#00FFFF'/>
+          <Marker coordinate= {{latitude: this.state.latitude, longitude: this.state.longitude}} image= {require('./marker.png')}/>
           
            {this.state.acc.map((item,index) => 
             <Circle center={{latitude: item.child("latitude").val(), longitude: item.child("longitude").val()}} radius= {30} fillColor= {this.getRandomColor()}/>
